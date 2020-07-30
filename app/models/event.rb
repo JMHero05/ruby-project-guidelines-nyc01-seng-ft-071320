@@ -1,6 +1,11 @@
 class Event < ActiveRecord::Base
     has_many :tickets
     has_many :users, through: :tickets
+    after_initialize :init
+
+    def init
+      self.ticket_count  ||= 100
+    end
 
     def self.events_by_venue
         self.all.map {|event| event.venue_name}.uniq

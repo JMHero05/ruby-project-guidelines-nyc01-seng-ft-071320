@@ -7,7 +7,7 @@ Ticket.delete_all
 User.delete_all
 a = ENV["key"]
 
-events_response = RestClient.get("https://app.ticketmaster.com/discovery/v2/events?apikey=a&postalCode=10002&radius=1&unit=miles&locale=*&includeTBD=yes&sort=date,asc&countryCode=US&stateCode=NY")
+events_response = RestClient.get("https://app.ticketmaster.com/discovery/v2/events?apikey=#{a}&postalCode=10002&radius=1&unit=miles&locale=*&includeTBD=yes&sort=date,asc&countryCode=US&stateCode=NY")
 events_data = JSON.parse(events_response)
 
 # def events
@@ -33,7 +33,7 @@ events_data.each do |key, value|
         events << key["_embedded"]["venues"][0]["postalCode"]
       end
     end  
-  end  
+  end 
 end
 
 all_events = [
@@ -53,8 +53,8 @@ event13 = my_keys.zip(events[84..90]).to_h,
 event14 = my_keys.zip(events[91..97]).to_h]
 
 all_events.each do |event_hash|
-  event = Event.new(event_hash)
-  # event.ticket_count = 100
+  event = Event.create(event_hash)
+  event.ticket_count = 100
   # binding.pry
 end
 
@@ -110,4 +110,4 @@ end
 
 
 
-binding.pry
+# binding.pry
