@@ -267,10 +267,13 @@ class User < ActiveRecord::Base
 
     def reserve
       puts "--------------------------------------------------------------"
-      puts "Which event name?"
+      puts "Which event date would you like to reserve?"
       user_input = gets.chomp
-      name = user_input
-      Event.name_events(name)
+      date = user_input
+      event = Event.event_by_date(date)
+      puts"--------------------------------------------------------------"
+      puts "Are you sure this is the event you want to reserve?"
+      event.pretty_event
     end
 
     # VIEW PROFILE PAGE AND ALL SUB METHODS

@@ -68,5 +68,17 @@ class Event < ActiveRecord::Base
         end
     end
 
+    def self.event_by_date(date)
+        self.all.find_by date: "#{date}"
+    end
+
+    def pretty_event
+        puts"--------------------------------------------------------------"
+        puts "'#{self.event_name}' on #{self.date}"
+        puts "At '#{self.venue_name}'"
+        puts "#{self.venue_address}, #{self.venue_city}, #{self.venue_state} #{self.postal_code}"
+        puts"--------------------------------------------------------------"
+    end
+
 
 end
