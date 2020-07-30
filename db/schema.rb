@@ -11,14 +11,18 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_07_29_042134) do
 =======
 ActiveRecord::Schema.define(version: 2020_07_30_195941) do
 >>>>>>> second_repo
+=======
+ActiveRecord::Schema.define(version: 2020_07_30_215848) do
+>>>>>>> second_repo
 
   create_table "events", force: :cascade do |t|
     t.string "event_name"
-    t.date "date"
+    t.string "date"
     t.string "venue_name"
     t.string "venue_address"
     t.string "venue_city"
