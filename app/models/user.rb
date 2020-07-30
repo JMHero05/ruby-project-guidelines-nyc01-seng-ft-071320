@@ -149,7 +149,11 @@ class User < ActiveRecord::Base
       name = gets.chomp
       Event.venue_events(name)
       puts "--------------------------------------------------------------"
+<<<<<<< HEAD
       prompt = "Would you like to 'reserve' a ticket for an event or 'search' another venue, or 'start over' with another search?"
+=======
+      prompt = "Would you like to 'reserve' a ticket for one of these events or 'search' another venue, or 'start over' with another search?"
+>>>>>>> second_repo
       puts prompt
       while user_input = gets.downcase.chomp
         case
@@ -263,6 +267,19 @@ class User < ActiveRecord::Base
       end
     end
 
+<<<<<<< HEAD
+=======
+    # RESERVE TICKETS----------------------------------------------------------
+
+    def reserve
+      puts "--------------------------------------------------------------"
+      puts "Which event name?"
+      user_input = gets.chomp
+      name = user_input
+      Event.name_events(name)
+    end
+
+>>>>>>> second_repo
     # VIEW PROFILE PAGE AND ALL SUB METHODS
 
     def view_profile
@@ -302,6 +319,13 @@ class User < ActiveRecord::Base
     # update info?
 
     # EXTRA USER METHODS
+<<<<<<< HEAD
+=======
+
+    def reserve_tickets(event, ticket_count)
+      Ticket.create(self.id, event.id, ticket_count)
+    end
+>>>>>>> second_repo
       
     def log_out
       exit
@@ -309,18 +333,24 @@ class User < ActiveRecord::Base
       puts "See you later #{self.name}! "
     end
 
+<<<<<<< HEAD
     def reserve(event, ticket_count)
 
       Ticket.create(self, event, ticket_count)
     end
 
+=======
+>>>>>>> second_repo
 
     # def reserved_tickets
     #   Ticket.all.select {|ticket| ticket.venue == self}
     # end
 
     # EVENTS PAGE
+<<<<<<< HEAD
     
+=======
+>>>>>>> second_repo
 
     # VIEW PROFILE
       # user info

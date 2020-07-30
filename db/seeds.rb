@@ -16,8 +16,13 @@ events_data = JSON.parse(events_response)
 #   end
 # end
 
+<<<<<<< HEAD
 event_name = []
 venue_name = []
+=======
+# event_name = []
+# venue_name = []
+>>>>>>> second_repo
 my_keys = [:event_name, :date, :venue_name, :venue_address, :venue_city, :venue_state, :postal_code]
 events = []
 events_data.each do |key, value|
@@ -33,7 +38,11 @@ events_data.each do |key, value|
         events << key["_embedded"]["venues"][0]["postalCode"]
       end
     end  
+<<<<<<< HEAD
   end  
+=======
+  end 
+>>>>>>> second_repo
 end
 
 all_events = [
@@ -54,7 +63,11 @@ event14 = my_keys.zip(events[91..97]).to_h]
 
 all_events.each do |event_hash|
   event = Event.create(event_hash)
+<<<<<<< HEAD
   # event.ticket_count = 100
+=======
+  event.ticket_count = 100
+>>>>>>> second_repo
   # binding.pry
 end
 
@@ -80,6 +93,7 @@ end
 #   end  
 # end
 
+<<<<<<< HEAD
 # event_date = []
 # events_data.each do |key, value|
 #   value.each do |key, value|
@@ -90,6 +104,18 @@ end
 #     end  
 #   end
 # end
+=======
+event_date = []
+events_data.each do |key, value|
+  value.each do |key, value|
+    if key == "events"
+      value.each do |key|
+        event_date << key["dates"]["start"]["localDate"]
+      end
+    end  
+  end
+end
+>>>>>>> second_repo
 
 # @in_event = events[0].map do |key, value|
 #   value.each do |key, value|

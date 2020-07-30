@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_07_29_042134) do
+=======
+ActiveRecord::Schema.define(version: 2020_07_30_195941) do
+>>>>>>> second_repo
 
   create_table "events", force: :cascade do |t|
     t.string "event_name"
@@ -20,11 +24,19 @@ ActiveRecord::Schema.define(version: 2020_07_29_042134) do
     t.string "venue_city"
     t.string "venue_state"
     t.string "postal_code"
+<<<<<<< HEAD
+=======
+    t.integer "ticket_count"
+>>>>>>> second_repo
   end
 
   create_table "tickets", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
+<<<<<<< HEAD
+=======
+    t.integer "ticket_count"
+>>>>>>> second_repo
   end
 
   create_table "users", force: :cascade do |t|
