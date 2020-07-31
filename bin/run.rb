@@ -1,8 +1,6 @@
 require_relative '../config/environment'
 require 'pry'
 
-User.delete_all
-
 # USER STORIES
 
 # As a User I want to purchase tickets to events - def reserve ticket
@@ -10,11 +8,8 @@ User.delete_all
 # As a User I want to see what I have tickets to already - def reservations
 
 
-user1 = User.create(username: "1234", password: "1234", name: "Jake Mills", postal_code: "10002")
 
-cli = CLI.new
+CLI.start
 
-
-
-binding.pry
+# binding.pry
 

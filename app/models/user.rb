@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
     def self.homepage
       puts "--------------------------------------------------------------------------------"
-      puts "Welcome to TicketMaster - Lite!"
+      puts "Welcome to Scalper's Paradise!"
       prompt = "Please enter 'log in' to log in, or enter 'sign up' to create a new account."
       puts prompt
       puts "--------------------------------------------------------------------------------"
@@ -40,24 +40,24 @@ class User < ActiveRecord::Base
       puts "Password?"
         password = gets.chomp
       user = User.find_by(username: username, password: password)
-        if User.all.include?(user)
-        else
-          puts "Incorrect username or password. Please enter 'sign up' or 'log in'?"
-          while user_input = gets.downcase.chomp
-            case
-            when user_input == "log in"
-              user = User.login
-              break
-            when user_input == "sign up"
-              user = User.sign_up
-              break
-             else 
-               puts "Uh oh! Looks like that didn't work."
-               puts prompt
-            end   
-          end
+      if User.all.include?(user)
+        user.welcome
+      else
+        puts "Incorrect username or password. Please enter 'sign up' or 'log in'?"
+        while user_input = gets.downcase.chomp
+          case
+          when user_input == "log in"
+            user = User.login
+            break
+          when user_input == "sign up"
+            user = User.sign_up
+            break
+          else 
+            puts "Uh oh! Looks like that didn't work."
+            puts prompt
+          end   
         end
-      user
+      end
     end
 
     # THIS IS WHERE USER SIGNS UP
@@ -79,6 +79,7 @@ class User < ActiveRecord::Base
 # SUCCESFUL USER LOG IN WELCOME PAGE
 
     def welcome
+      puts "--------------------------------------------------------------"
       puts "Welcome #{self.name}!"
       puts "--------------------------------------------------------------"
       prompt = "Would you like to 'view events' or 'view profile'?"
@@ -94,6 +95,7 @@ class User < ActiveRecord::Base
         else 
           puts "Uh oh! Looks like that didn't work."
           puts prompt
+          puts "--------------------------------------------------------------"
         end   
       end
     end
@@ -338,6 +340,7 @@ class User < ActiveRecord::Base
       puts "Name: #{self.name}"
       puts "Postal Code: #{self.postal_code}"
       puts "--------------------------------------------------------------"
+      self.welcome
     end
     # update info?
 
@@ -358,13 +361,32 @@ class User < ActiveRecord::Base
 
 
     def reserved_tickets
-      ticket = Ticket.all.each do |ticket| 
+      Ticket.all.each do |ticket|
         if ticket.user_id == self.id
           puts "-----------------------------------------------------------------------------------------------------------------------"
           puts "You have #{ticket.ticket_count} ticket(s) to the event #{ticket.event_name}, on #{ticket.date} at #{ticket.venue_name}."
           puts "-----------------------------------------------------------------------------------------------------------------------"
         else 
+          # NEED TO REVISIT THIS
+          puts "----------------------------------------------------------------------------------------------"
           puts "Looks like you don't have tickets."
+          prompt = "Would you like to search for new tickets? Yes or no?"
+          puts prompt
+          puts "----------------------------------------------------------------------------------------------"
+          while user_input = gets.downcase.chomp
+          case
+            when user_input == "yes"
+              self.search_events
+              break
+            when user_input == "no"
+              self.welcome
+              break
+            else
+              puts "Uh oh! Looks like that didn't work."
+              puts prompt
+              puts "----------------------------------------------------------------------------------------------"
+            end
+          end
         end
       end
       self.welcome
