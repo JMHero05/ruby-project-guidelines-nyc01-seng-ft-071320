@@ -66,7 +66,7 @@ class Event < ActiveRecord::Base
             puts "#{key[:venue_address]}, #{key[:venue_city]}, #{key[:venue_state]} #{key[:postal_code]}"
             puts "--------------------------------------------------------------------------------------"
         end
-    end
+    end 
 
     def self.event_by_date(date)
         self.all.find_by date: "#{date}"
