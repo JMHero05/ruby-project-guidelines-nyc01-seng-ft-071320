@@ -8,5 +8,16 @@ class Ticket < ActiveRecord::Base
     def init
       self.ticket_count  ||= 0
     end
+<<<<<<< HEAD
+>>>>>>> second_repo
+=======
+
+    # def user_ticket
+    #     Ticket.all.select {|ticket| ticket.user_id == self.id}
+    # end
+
+    # def event_ticket
+    #   Ticket.all.select {|ticket| ticket.event_id == self.id}
+    # end
 >>>>>>> second_repo
 end

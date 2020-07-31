@@ -12,12 +12,16 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_07_29_042134) do
 =======
 ActiveRecord::Schema.define(version: 2020_07_30_195941) do
 >>>>>>> second_repo
 =======
 ActiveRecord::Schema.define(version: 2020_07_30_215848) do
+>>>>>>> second_repo
+=======
+ActiveRecord::Schema.define(version: 2020_07_31_002750) do
 >>>>>>> second_repo
 
   create_table "events", force: :cascade do |t|
@@ -40,6 +44,12 @@ ActiveRecord::Schema.define(version: 2020_07_30_215848) do
 <<<<<<< HEAD
 =======
     t.integer "ticket_count"
+<<<<<<< HEAD
+>>>>>>> second_repo
+=======
+    t.string "event_name"
+    t.string "date"
+    t.string "venue_name"
 >>>>>>> second_repo
   end
 

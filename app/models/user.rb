@@ -149,11 +149,7 @@ class User < ActiveRecord::Base
       name = gets.chomp
       Event.venue_events(name)
       puts "--------------------------------------------------------------"
-<<<<<<< HEAD
-      prompt = "Would you like to 'reserve' a ticket for an event or 'search' another venue, or 'start over' with another search?"
-=======
       prompt = "Would you like to 'reserve' a ticket for one of these events or 'search' another venue, or 'start over' with another search?"
->>>>>>> second_repo
       puts prompt
       while user_input = gets.downcase.chomp
         case
@@ -270,14 +266,38 @@ class User < ActiveRecord::Base
     # RESERVE TICKETS----------------------------------------------------------
 
     def reserve
-      puts "--------------------------------------------------------------"
-      puts "Which event date would you like to reserve?"
-      user_input = gets.chomp
-      date = user_input
+      puts"--------------------------------------------------------------"
+      prompt1 = "Which event date would you like to reserve?"
+      puts prompt1
+      date = gets.chomp
+      DateTime.parse date rescue nil
       event = Event.event_by_date(date)
       puts"--------------------------------------------------------------"
       puts "Are you sure this is the event you want to reserve?"
       event.pretty_event
+      prompt2 = "'Yes' or 'search again'?"
+      puts prompt2
+      puts"--------------------------------------------------------------"
+        while user_input = gets.downcase.chomp
+        case
+          when user_input == "yes"
+            puts "--------------------------------------------------------------"
+            puts "How many tickets?"
+            ticket_count = gets.chomp.to_i
+            self.reserve_tickets(event, ticket_count)
+            break
+          when user_input == "search again"
+            self.search_events
+            break
+          else
+           puts "Uh oh! Looks like that didn't work."
+            puts prompt2
+          end
+        end
+        # else
+        #   puts "Uh oh! Looks like that didn't work."
+        #   puts prompt1
+        # end
     end
 
     # VIEW PROFILE PAGE AND ALL SUB METHODS
@@ -295,9 +315,6 @@ class User < ActiveRecord::Base
           break
         when user_input == "reserved tickets"
           self.reserved_tickets
-          break
-        when user_input == "quirky picture"
-          self.quirky_picture
           break
         when user_input == "log out"
           self.log_out
@@ -319,38 +336,34 @@ class User < ActiveRecord::Base
     # update info?
 
     # EXTRA USER METHODS
-<<<<<<< HEAD
-=======
 
     def reserve_tickets(event, ticket_count)
-      Ticket.create(self.id, event.id, ticket_count)
+      ticket = Ticket.create(user_id: self.id, event_id: event.id, ticket_count: ticket_count, event_name: event.event_name, date: event.date, venue_name: event.venue_name)
+      event.ticket_count -= ticket_count
+      puts "Enjoy the show!"
+      self.welcome
     end
->>>>>>> second_repo
       
     def log_out
       exit
     rescue SystemExit
-      puts "See you later #{self.name}! "
+      puts "See you later #{self.name}!"
     end
 
-<<<<<<< HEAD
-    def reserve(event, ticket_count)
 
-      Ticket.create(self, event, ticket_count)
+    def reserved_tickets
+      ticket = Ticket.all.each do |ticket| 
+        if ticket.user_id == self.id
+          puts "--------------------------------------------------------------"
+          puts "You have #{ticket.ticket_count} ticket(s) to the event #{ticket.event_name}, on #{ticket.date} at #{ticket.venue_name}."
+          puts "--------------------------------------------------------------"
+        else 
+          puts "Looks like you don't have tickets."
+        end
+      end
+      self.welcome
     end
-
-=======
->>>>>>> second_repo
-
-    # def reserved_tickets
-    #   Ticket.all.select {|ticket| ticket.venue == self}
-    # end
-
     # EVENTS PAGE
-<<<<<<< HEAD
-    
-=======
->>>>>>> second_repo
 
     # VIEW PROFILE
       # user info
