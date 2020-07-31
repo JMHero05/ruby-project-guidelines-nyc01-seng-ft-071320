@@ -4,12 +4,18 @@ class User < ActiveRecord::Base
 
 # THIS IS THE START AND THE HOMEPAGE
 
+    def render_ascii_art
+      File.readlines("ascii_art.txt") do |line|
+        puts line
+      end
+    end
+
     def self.homepage
-      puts "--------------------------------------------------------------"
+      puts "--------------------------------------------------------------------------------"
       puts "Welcome to TicketMaster - Lite!"
       prompt = "Please enter 'log in' to log in, or enter 'sign up' to create a new account."
       puts prompt
-      puts "--------------------------------------------------------------"
+      puts "--------------------------------------------------------------------------------"
         while user_input = gets.downcase.chomp
           case
           when user_input == "log in"
@@ -95,9 +101,9 @@ class User < ActiveRecord::Base
     # EVENTS PAGE AND ALL EVENT PAGE SUB METHODS
 
     def events_page
-      puts "--------------------------------------------------------------"
+      puts "------------------------------------------------------------------------------------------------"
       puts "Welcome to the Events Page! Where we keep you in the know :)"
-      puts "--------------------------------------------------------------"
+      puts "------------------------------------------------------------------------------------------------"
       prompt = "Would you like to 'search events', have us 'suggest events', or quickly see 'events nearby'?"
       puts prompt 
       while user_input = gets.downcase.chomp
@@ -121,7 +127,7 @@ class User < ActiveRecord::Base
 # SEARCHING EVENTS ----------------------------------------------------------
 
     def search_events
-      puts "--------------------------------------------------------------"
+      puts "---------------------------------------------------------------------------------"
       prompt = "Would like to search by 'venue', search by 'event name', or see all 'events'?"
       puts prompt
       while user_input = gets.downcase.chomp
@@ -144,11 +150,11 @@ class User < ActiveRecord::Base
 
     def venue
       puts Event.events_by_venue
-      puts "--------------------------------------------------------------"
+      puts "--------------------------------------------------------------------------------------------------------------------------------"
       puts "Type the venue you'd like to peruse?"
       name = gets.chomp
       Event.venue_events(name)
-      puts "--------------------------------------------------------------"
+      puts "--------------------------------------------------------------------------------------------------------------------------------"
       prompt = "Would you like to 'reserve' a ticket for one of these events or 'search' another venue, or 'start over' with another search?"
       puts prompt
       while user_input = gets.downcase.chomp
@@ -171,11 +177,11 @@ class User < ActiveRecord::Base
 
     def event_name
       puts Event.events_by_event_name
-      puts "--------------------------------------------------------------"
+      puts "--------------------------------------------------------------------------------------------------------------------------"
       puts "Type the event name you'd like to peruse?"
       name = gets.chomp
       Event.name_events(name)
-      puts "--------------------------------------------------------------"
+      puts "--------------------------------------------------------------------------------------------------------------------------"
       prompt = "Would you like to 'reserve' a ticket for an event or 'search' another event name, or 'start over' with another search?"
       puts prompt
       while user_input = gets.downcase.chomp
@@ -198,7 +204,7 @@ class User < ActiveRecord::Base
 
     def events
       Event.all_events
-      puts "--------------------------------------------------------------"
+      puts "-------------------------------------------------------------------------------------------------"
       prompt = "Would you like to 'reserve' a ticket for an event above, or 'start over' with another search?"
       puts prompt
       while user_input = gets.downcase.chomp
@@ -219,9 +225,9 @@ class User < ActiveRecord::Base
     # SUGGESTED EVENTS --------------------------------------------------------
 
     def suggest_events
-      puts "--------------------------------------------------------------"
+      puts "-------------------------------------------------------------------------------------------------"
       Event.suggested_events
-      puts "--------------------------------------------------------------"
+      puts "-------------------------------------------------------------------------------------------------"
       prompt = "Would you like to 'reserve' a ticket for an event above, or 'start over' with another search?"
       puts prompt
       while user_input = gets.downcase.chomp
@@ -242,10 +248,10 @@ class User < ActiveRecord::Base
     # EVENTS NEARBY------------------------------------------------------------
 
     def events_nearby
-      puts "--------------------------------------------------------------"
+      puts "------------------------------------------------------------------------------------------"
       postal_code = self.postal_code
       Event.postal_code_events(postal_code)
-      puts "--------------------------------------------------------------"
+      puts "-------------------------------------------------------------------------------------------"
       prompt = "Would you like to 'reserve' a ticket for an event, or 'start over' with another search?"
       puts prompt
       while user_input = gets.downcase.chomp
@@ -266,22 +272,22 @@ class User < ActiveRecord::Base
     # RESERVE TICKETS----------------------------------------------------------
 
     def reserve
-      puts"--------------------------------------------------------------"
+      puts"----------------------------------------------------"
       prompt1 = "Which event date would you like to reserve?"
       puts prompt1
       date = gets.chomp
       DateTime.parse date rescue nil
       event = Event.event_by_date(date)
-      puts"--------------------------------------------------------------"
+      puts"----------------------------------------------------"
       puts "Are you sure this is the event you want to reserve?"
       event.pretty_event
       prompt2 = "'Yes' or 'search again'?"
       puts prompt2
-      puts"--------------------------------------------------------------"
+      puts"----------------------------------------------------"
         while user_input = gets.downcase.chomp
         case
           when user_input == "yes"
-            puts "--------------------------------------------------------------"
+            puts "---------------------------------------------"
             puts "How many tickets?"
             ticket_count = gets.chomp.to_i
             self.reserve_tickets(event, ticket_count)
@@ -303,10 +309,10 @@ class User < ActiveRecord::Base
     # VIEW PROFILE PAGE AND ALL SUB METHODS
 
     def view_profile
-      puts "--------------------------------------------------------------"
+      puts "----------------------------------------------------------------------------------"
       puts "Welcome to your Profile Page!"
-      puts "--------------------------------------------------------------"
-      prompt = "Would you like to view your 'user info', see 'reserved tickets', view a 'quirky picture', or 'log out'?"
+      puts "----------------------------------------------------------------------------------"
+      prompt = "Would you like to view your 'user info', see 'reserved tickets', or 'log out'?"
       puts prompt
        while user_input = gets.downcase.chomp
         case
@@ -354,9 +360,9 @@ class User < ActiveRecord::Base
     def reserved_tickets
       ticket = Ticket.all.each do |ticket| 
         if ticket.user_id == self.id
-          puts "--------------------------------------------------------------"
+          puts "-----------------------------------------------------------------------------------------------------------------------"
           puts "You have #{ticket.ticket_count} ticket(s) to the event #{ticket.event_name}, on #{ticket.date} at #{ticket.venue_name}."
-          puts "--------------------------------------------------------------"
+          puts "-----------------------------------------------------------------------------------------------------------------------"
         else 
           puts "Looks like you don't have tickets."
         end
