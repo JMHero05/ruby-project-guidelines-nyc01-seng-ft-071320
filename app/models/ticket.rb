@@ -12,6 +12,7 @@ class Ticket < ActiveRecord::Base
 >>>>>>> second_repo
 =======
 
+<<<<<<< HEAD
     # def user_ticket
     #     Ticket.all.select {|ticket| ticket.user_id == self.id}
     # end
@@ -19,5 +20,7 @@ class Ticket < ActiveRecord::Base
     # def event_ticket
     #   Ticket.all.select {|ticket| ticket.event_id == self.id}
     # end
+>>>>>>> second_repo
+=======
 >>>>>>> second_repo
 end

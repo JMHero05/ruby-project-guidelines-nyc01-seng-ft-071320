@@ -18,9 +18,11 @@ For our Mod1 Final Project we developed a ticket reservation app using the Ticke
 1. 'Log in' or create a profile with 'sign up' (you will need a correct case sensitive password).
   - 'Log in' accesses a User who's profile is already saved in the database.
   - 'Sign up' allows the User to create a new profile and is then saved in the database.
+
 2. After successful login, you will be shown the welcome page. This is where you can 'view events' or 'view profile'. Different outcomes happen depending upon selection.
   - 'View events' will bring the user to the events page.
   - 'View profile' will bring the user to their profile page.
+
 3. If 'view profile' is selected the user's profile page displays these options:
   - 'user info' displays the user's profile information (without their password) and then brings them back to the welcome page.
   - 'reserved tickets' will do one of two options
@@ -29,10 +31,13 @@ For our Mod1 Final Project we developed a ticket reservation app using the Ticke
       - If no is selected, the user is brought back to the welcome page.
     - If the user does have reserved tickets, their reservations are displayed and they are brought back to the welcome page.
   - 'log out' will display exit message, log the user out, and end the application.
+
 4. If 'view events' is selected the user will be brought to the events page with the following options:
   - 'search events' SEE STEP 5
   - 'suggest events' SEE STEP 6
   - 'events nearby' SEE STEP 7
+  - 'log out' will display exit message, log the user out, and end the application.
+
 5. Search Events provides the following options:
   - 'venue' provides a list of all available venue names and asks the user to respond with the venue name they would like to search.
     - Upon entering a venue name on the list correctly, the user will be shown all events and their dates at that particular venue. Following the displayed events, these options will be available:
@@ -47,15 +52,22 @@ For our Mod1 Final Project we developed a ticket reservation app using the Ticke
   - 'events' provides a list of all available events, their dates, and full venue information. Following the displayed events, these options will be available:
     - 'reserve' SEE STEP 8
     - 'start over' will bring the user back to the events page.
+
 6. Suggest Events will provide a random sample of three events and all their available data within the events database. Following the displayed options the user can choose:
   - 'reserve' SEE STEP 8
   - 'start over' will bring the user back to the events page.
+
 7. Events Nearby will display event names and dates where the venue postal code matches the user's postal code. Following the displayed options the user can choose:
   - 'reserve' SEE STEP 8
   - 'start over' will bring the user back to the events page.
+
 8. Reserve will ask the user to provide the date of the particular event the user would like to reserve. Upon entering a correct date, the user will be asked if the event they selected is the one they truly want to reserve, with the full event information being displayed. Then, the user is provided with the following options:
   - 'yes' will ask the user how many tickets they would like to reserve. Upon entering a number a new ticket reservation will be created. The user will then see the message 'Enjoy the show!' and be brought back to the welcome page. (The new ticket reservation now joins the user and the event, and can be displayed under reserved tickets for this particular user.)
   - 'search again' will bring the user back to the events page.
+
+9. If user chooses 'log out', you must enter 'ruby bin/run.rb' to begin application again.
+
+# License
 
 
 # Module One Final Project Guidelines

@@ -6,13 +6,8 @@ class User < ActiveRecord::Base
 
 # THIS IS THE START AND THE HOMEPAGE
 
-    def render_ascii_art
-      File.readlines("ascii_art.txt") do |line|
-        puts line
-      end
-    end
-
     def self.homepage
+      puts ASCII.art
       puts "--------------------------------------------------------------------------------"
       puts "Welcome to Scalper's Paradise!"
       prompt = "Please enter 'log in' to log in, or enter 'sign up' to create a new account."
@@ -108,7 +103,7 @@ class User < ActiveRecord::Base
       puts "------------------------------------------------------------------------------------------------"
       puts "Welcome to the Events Page! Where we keep you in the know :)"
       puts "------------------------------------------------------------------------------------------------"
-      prompt = "Would you like to 'search events', have us 'suggest events', or quickly see 'events nearby'?"
+      prompt = "Would you like to 'search events', have us 'suggest events', quickly see 'events nearby', or 'log out'?"
       puts prompt 
       while user_input = gets.downcase.chomp
         case
@@ -120,6 +115,9 @@ class User < ActiveRecord::Base
           break
         when user_input == "events nearby"
           self.events_nearby
+          break
+        when user_input == "log out"
+          self.log_out
           break
         else 
           puts "Uh oh! Looks like that didn't work."

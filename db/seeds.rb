@@ -10,14 +10,6 @@ a = ENV["key"]
 events_response = RestClient.get("https://app.ticketmaster.com/discovery/v2/events?apikey=#{a}&postalCode=10002&radius=1&unit=miles&locale=*&includeTBD=yes&sort=date,asc&countryCode=US&stateCode=NY")
 events_data = JSON.parse(events_response)
 
-# def events
-#   events_data.map do |key, value|
-#     value   
-#   end
-# end
-
-# event_name = []
-# venue_name = []
 my_keys = [:event_name, :date, :venue_name, :venue_address, :venue_city, :venue_state, :postal_code]
 events = []
 events_data.each do |key, value|
@@ -55,62 +47,9 @@ event14 = my_keys.zip(events[91..97]).to_h]
 all_events.each do |event_hash|
   event = Event.create(event_hash)
   event.ticket_count = 100
-  # binding.pry
 end
 
 user1 = User.create(username: "jake", password: "1234", name: "Jake Mills", postal_code: "10002")
 user2 = User.create(username: "victorscholz", password: "qwerty", name: "Victor Scholz", postal_code: "11233")
-
-# event_name = []
-# events_data.each do |key, value|
-#   value.each do |key, value|
-#     if key == "events"
-#       value.each do |key|
-#         event_name << key["name"]
-#       end
-#     end  
-#   end  
-# end
-
-# venue_name = []
-# events_data.each do |key, value|
-#   value.each do |key, value|
-#     if key == "events"
-#       value.each do |key|
-#         venue_name << key["_embedded"]["venues"][0]["name"]
-#       end
-#     end  
-#   end  
-# end
-
-# event_date = []
-# events_data.each do |key, value|
-#   value.each do |key, value|
-#     if key == "events"
-#       value.each do |key|
-#         event_date << key["dates"]["start"]["localDate"]
-#       end
-#     end  
-#   end
-# end
-
-# @in_event = events[0].map do |key, value|
-#   value.each do |key, value|
-#     if key == "name"
-#       value
-#     end  
-#   end  
-# end
-
-# def event_names(index)
-#   @in_event[0][index].map do |key, value|
-#     if key == "name"
-#       value
-#     end
-#   end
-# end
-
-
-
 
 # binding.pry
