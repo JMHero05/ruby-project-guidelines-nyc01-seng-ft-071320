@@ -58,6 +58,9 @@ all_events.each do |event_hash|
   # binding.pry
 end
 
+user1 = User.create(username: "jake", password: "1234", name: "Jake Mills", postal_code: "10002")
+user2 = User.create(username: "victorscholz", password: "qwerty", name: "Victor Scholz", postal_code: "11233")
+
 # event_name = []
 # events_data.each do |key, value|
 #   value.each do |key, value|

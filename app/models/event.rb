@@ -49,22 +49,22 @@ class Event < ActiveRecord::Base
     def self.all_events
         events = self.all
         events.select do |key, value| 
-            puts "--------------------------------------------------------------"
+            puts "--------------------------------------------------------------------------------------"
             puts "The event '#{key[:event_name]}' is happening on #{key[:date]}."
             puts "At '#{key[:venue_name]}'"
             puts "#{key[:venue_address]}, #{key[:venue_city]}, #{key[:venue_state]} #{key[:postal_code]}"
-            puts "--------------------------------------------------------------"
+            puts "--------------------------------------------------------------------------------------"
         end
     end
 
     def self.suggested_events
         events = self.all.sample(3)
         events.select do |key, value| 
-            puts "--------------------------------------------------------------"
+            puts "--------------------------------------------------------------------------------------"
             puts "The event '#{key[:event_name]}' is happening on #{key[:date]}."
             puts "At '#{key[:venue_name]}'"
             puts "#{key[:venue_address]}, #{key[:venue_city]}, #{key[:venue_state]} #{key[:postal_code]}"
-            puts "--------------------------------------------------------------"
+            puts "--------------------------------------------------------------------------------------"
         end
     end
 
@@ -73,11 +73,11 @@ class Event < ActiveRecord::Base
     end
 
     def pretty_event
-        puts"--------------------------------------------------------------"
+        puts"-----------------------------------------------------------------------------------"
         puts "'#{self.event_name}' on #{self.date}"
         puts "At '#{self.venue_name}'"
         puts "#{self.venue_address}, #{self.venue_city}, #{self.venue_state} #{self.postal_code}"
-        puts"--------------------------------------------------------------"
+        puts"-----------------------------------------------------------------------------------"
     end
 
 
