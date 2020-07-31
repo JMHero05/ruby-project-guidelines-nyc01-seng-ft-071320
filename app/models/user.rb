@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
     has_many :tickets
     has_many :events, through: :tickets
 
+    require 'date'
+
 # THIS IS THE START AND THE HOMEPAGE
 
     def render_ascii_art
@@ -278,7 +280,11 @@ class User < ActiveRecord::Base
       prompt1 = "Which event date would you like to reserve?"
       puts prompt1
       date = gets.chomp
-      DateTime.parse date rescue nil
+      begin
+        Date.parse(date)
+      rescue ArgumentError
+        self.reserve
+      end
       event = Event.event_by_date(date)
       puts"----------------------------------------------------"
       puts "Are you sure this is the event you want to reserve?"
@@ -298,14 +304,10 @@ class User < ActiveRecord::Base
             self.search_events
             break
           else
-           puts "Uh oh! Looks like that didn't work."
+            puts "Uh oh! Looks like that didn't work."
             puts prompt2
           end
         end
-        # else
-        #   puts "Uh oh! Looks like that didn't work."
-        #   puts prompt1
-        # end
     end
 
     # VIEW PROFILE PAGE AND ALL SUB METHODS
@@ -348,7 +350,8 @@ class User < ActiveRecord::Base
 
     def reserve_tickets(event, ticket_count)
       ticket = Ticket.create(user_id: self.id, event_id: event.id, ticket_count: ticket_count, event_name: event.event_name, date: event.date, venue_name: event.venue_name)
-      event.ticket_count -= ticket_count
+      event[:ticket_count] = (event.ticket_count -= ticket_count)
+      event.save!
       puts "Enjoy the show!"
       self.welcome
     end
@@ -359,43 +362,45 @@ class User < ActiveRecord::Base
       puts "See you later #{self.name}!"
     end
 
+    def user_tickets
+      Ticket.all.select {|ticket| ticket.user_id == self.id}
+    end
+
 
     def reserved_tickets
-      Ticket.all.each do |ticket|
-        if ticket.user_id == self.id
-          puts "-----------------------------------------------------------------------------------------------------------------------"
-          puts "You have #{ticket.ticket_count} ticket(s) to the event #{ticket.event_name}, on #{ticket.date} at #{ticket.venue_name}."
-          puts "-----------------------------------------------------------------------------------------------------------------------"
-        else 
-          # NEED TO REVISIT THIS
-          puts "----------------------------------------------------------------------------------------------"
-          puts "Looks like you don't have tickets."
-          prompt = "Would you like to search for new tickets? Yes or no?"
-          puts prompt
-          puts "----------------------------------------------------------------------------------------------"
-          while user_input = gets.downcase.chomp
-          case
-            when user_input == "yes"
-              self.search_events
-              break
-            when user_input == "no"
-              self.welcome
-              break
-            else
-              puts "Uh oh! Looks like that didn't work."
-              puts prompt
-              puts "----------------------------------------------------------------------------------------------"
-            end
+      reserved = self.user_tickets
+      if reserved.empty?
+        puts "----------------------------------------------------------------------------------------------"
+        puts "Looks like you don't have tickets."
+        prompt = "Would you like to search and reserve new tickets? Yes or no?"
+        puts prompt
+        puts "----------------------------------------------------------------------------------------------"
+        while user_input = gets.downcase.chomp
+        case
+          when user_input == "yes"
+            self.search_events
+            break
+          when user_input == "no"
+            self.welcome
+            break
+          else
+            puts "Uh oh! Looks like that didn't work."
+            puts prompt
+            puts "----------------------------------------------------------------------------------------------"
           end
         end
+      else 
+        reserved.each do |ticket|
+        puts "-----------------------------------------------------------------------------------------------------------------------"
+        puts "This reservation contains #{ticket.ticket_count} ticket(s) to the event #{ticket.event_name}, on #{ticket.date} at #{ticket.venue_name}."
+        puts "-----------------------------------------------------------------------------------------------------------------------"
+        end
+        self.welcome
       end
-      self.welcome
     end
     # EVENTS PAGE
 
     # VIEW PROFILE
-      # user info
-      # reserved tickets
       # quirky picture
 
     # RESERVING TICKETS
