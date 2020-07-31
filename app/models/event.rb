@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
     after_initialize :init
 
     def init
-      self.ticket_count  ||= 100
+        self.ticket_count  ||= 100
     end
 
     def self.events_by_venue
@@ -32,10 +32,6 @@ class Event < ActiveRecord::Base
             puts "--------------------------------------------------------------"
         end
     end
-
-    # def self.events_by_postal_code
-    #     self.all.map {|event| event.postal_code}
-    # end
 
     def self.postal_code_events(postal_code)
         events = self.all.select {|event| event.postal_code == postal_code}
@@ -75,10 +71,9 @@ class Event < ActiveRecord::Base
     def pretty_event
         puts"-----------------------------------------------------------------------------------"
         puts "'#{self.event_name}' on #{self.date}"
-        puts "At '#{self.venue_name}'"
+        puts "at '#{self.venue_name}'"
         puts "#{self.venue_address}, #{self.venue_city}, #{self.venue_state} #{self.postal_code}"
         puts"-----------------------------------------------------------------------------------"
     end
-
 
 end
