@@ -1,3 +1,63 @@
+# Welcome to ScalpMaster!
+A CLI app made by Jake Mills and Victor Scholz
+
+For our Mod1 Final Project we developed a ticket reservation app using the TicketMaster API. In this application the user can login or create a new profile and then access the available events. The user is able to search by venue, have events suggested to them, or show all events nearby. From there the user can reserve a ticket to pick up at the box office!
+
+
+# Install Instructions
+- Follow these steps below within your terminal.
+
+1. Migrate all tables by typing in 'rake db:migrate' into your terminal.
+2. Run seed database file by typing in 'rake db:seed' to get all user and event data.
+3. Once all the data is loaded, run the run file by typing in 'ruby bin/run.rb'
+4. Interact with the application using the command line.
+5. HINT: Most commands needed are contained within single quotes ('example')
+6. Have fun! And thanks for using ScalpMaster :)
+
+# Contributor’s Guideline
+1. 'Log in' or create a profile with 'sign up' (you will need a correct case sensitive password).
+  - 'Log in' accesses a User who's profile is already saved in the database.
+  - 'Sign up' allows the User to create a new profile and is then saved in the database.
+2. After successful login, you will be shown the welcome page. This is where you can 'view events' or 'view profile'. Different outcomes happen depending upon selection.
+  - 'View events' will bring the user to the events page.
+  - 'View profile' will bring the user to their profile page.
+3. If 'view profile' is selected the user's profile page displays these options:
+  - 'user info' displays the user's profile information (without their password) and then brings them back to the welcome page.
+  - 'reserved tickets' will do one of two options
+    - If the user does not have any reserved tickets, they are told they don't have any tickets and are given the option to search and reserve tickets.
+      - If yes is selected, the user is brought to the events page.
+      - If no is selected, the user is brought back to the welcome page.
+    - If the user does have reserved tickets, their reservations are displayed and they are brought back to the welcome page.
+  - 'log out' will display exit message, log the user out, and end the application.
+4. If 'view events' is selected the user will be brought to the events page with the following options:
+  - 'search events' SEE STEP 5
+  - 'suggest events' SEE STEP 6
+  - 'events nearby' SEE STEP 7
+5. Search Events provides the following options:
+  - 'venue' provides a list of all available venue names and asks the user to respond with the venue name they would like to search.
+    - Upon entering a venue name on the list correctly, the user will be shown all events and their dates at that particular venue. Following the displayed events, these options will be available:
+      - 'reserve' SEE STEP 8
+      - 'search' will allow the user to search another venue.
+      - 'start over' will bring the user back to the events page.
+  - 'event name' provides a list of all available event names and asks the user to respond with the event name they would like to search.
+    - Upon entering an event name on the list correctly, the user will be shown all events and their dates of that particular event name. Following the displayed events, these options will be available:
+      - 'reserve' SEE STEP 8
+      - 'search' will allow the user to search another event name.
+      - 'start over' will bring the user back to the events page.
+  - 'events' provides a list of all available events, their dates, and full venue information. Following the displayed events, these options will be available:
+    - 'reserve' SEE STEP 8
+    - 'start over' will bring the user back to the events page.
+6. Suggest Events will provide a random sample of three events and all their available data within the events database. Following the displayed options the user can choose:
+  - 'reserve' SEE STEP 8
+  - 'start over' will bring the user back to the events page.
+7. Events Nearby will display event names and dates where the venue postal code matches the user's postal code. Following the displayed options the user can choose:
+  - 'reserve' SEE STEP 8
+  - 'start over' will bring the user back to the events page.
+8. Reserve will ask the user to provide the date of the particular event the user would like to reserve. Upon entering a correct date, the user will be asked if the event they selected is the one they truly want to reserve, with the full event information being displayed. Then, the user is provided with the following options:
+  - 'yes' will ask the user how many tickets they would like to reserve. Upon entering a number a new ticket reservation will be created. The user will then see the message 'Enjoy the show!' and be brought back to the welcome page. (The new ticket reservation now joins the user and the event, and can be displayed under reserved tickets for this particular user.)
+  - 'search again' will bring the user back to the events page.
+
+
 # Module One Final Project Guidelines
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.

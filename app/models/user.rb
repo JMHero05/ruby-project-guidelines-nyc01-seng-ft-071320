@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
       puts "Postal Code"
         postal_code = gets.chomp
       user = User.create(username: username, password: password, name: name, postal_code: postal_code)
-      user
+      user.welcome
     end
 
 # SUCCESFUL USER LOG IN WELCOME PAGE
@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
 
     def search_events
       puts "---------------------------------------------------------------------------------"
-      prompt = "Would like to search by 'venue', search by 'event name', or see all 'events'?"
+      prompt = "Would you like to search by 'venue', search by 'event name', or see all 'events'?"
       puts prompt
       while user_input = gets.downcase.chomp
         case
@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
           self.venue
           break
         when user_input == "start over"
-          self.search_events
+          self.events_page
           break
         else
           puts "Uh oh! Looks like that didn't work."
@@ -197,7 +197,7 @@ class User < ActiveRecord::Base
           self.event_name
           break
         when user_input == "start over"
-          self.search_events
+          self.events_page
           break
         else
           puts "Uh oh! Looks like that didn't work."
@@ -217,7 +217,7 @@ class User < ActiveRecord::Base
           self.reserve
           break
         when user_input == "start over"
-          self.search_events
+          self.events_page
           break
         else
           puts "Uh oh! Looks like that didn't work."
@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
           self.reserve
           break
         when user_input == "start over"
-          self.search_events
+          self.events_page
           break
         else
           puts "Uh oh! Looks like that didn't work."
@@ -264,7 +264,7 @@ class User < ActiveRecord::Base
           self.reserve
           break
         when user_input == "start over"
-          self.search_events
+          self.events_page
           break
         else
           puts "Uh oh! Looks like that didn't work."
@@ -292,22 +292,22 @@ class User < ActiveRecord::Base
       prompt2 = "'Yes' or 'search again'?"
       puts prompt2
       puts"----------------------------------------------------"
-        while user_input = gets.downcase.chomp
-        case
-          when user_input == "yes"
-            puts "---------------------------------------------"
-            puts "How many tickets?"
-            ticket_count = gets.chomp.to_i
-            self.reserve_tickets(event, ticket_count)
-            break
-          when user_input == "search again"
-            self.search_events
-            break
-          else
-            puts "Uh oh! Looks like that didn't work."
-            puts prompt2
-          end
+      while user_input = gets.downcase.chomp
+      case
+        when user_input == "yes"
+          puts "---------------------------------------------"
+          puts "How many tickets?"
+          ticket_count = gets.chomp.to_i
+          self.reserve_tickets(event, ticket_count)
+          break
+        when user_input == "search again"
+          self.events_page
+          break
+        else
+          puts "Uh oh! Looks like that didn't work."
+          puts prompt2
         end
+      end
     end
 
     # VIEW PROFILE PAGE AND ALL SUB METHODS
@@ -398,12 +398,5 @@ class User < ActiveRecord::Base
         self.welcome
       end
     end
-    # EVENTS PAGE
-
-    # VIEW PROFILE
-      # quirky picture
-
-    # RESERVING TICKETS
-    # 
 
 end
