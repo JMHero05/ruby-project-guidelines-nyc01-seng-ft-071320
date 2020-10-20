@@ -1,4 +1,5 @@
 class Ticket < ActiveRecord::Base
+<<<<<<< HEAD
     belongs_to :user
     belongs_to :event
 <<<<<<< HEAD
@@ -24,3 +25,13 @@ class Ticket < ActiveRecord::Base
 =======
 >>>>>>> second_repo
 end
+=======
+  belongs_to :user
+  belongs_to :event
+  after_initialize :init
+
+  def init
+    self.ticket_count ||= 0
+  end
+end
+>>>>>>> second_repo
